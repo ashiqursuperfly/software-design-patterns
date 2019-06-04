@@ -3,7 +3,7 @@ package builder.shakes;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ShakeBuilder{
+public class ShakeBuilder {
 
     private ShakeType shakeType;
     private List<ExtraIngredients> extraIngredients;
@@ -12,35 +12,42 @@ public class ShakeBuilder{
         extraIngredients = new ArrayList<>();
     }
 
-    public static ShakeBuilder newInstance()
-    {
+    public static ShakeBuilder builder() {
         return new ShakeBuilder();
     }
 
+    /**
+     * This allows consumers to change the ShakeType any moment if they want
+     * but still keep their additional choices such as topping,lactose-intolerance intact
+     **/
     public ShakeBuilder setShakeType(ShakeType shakeType) {
         this.shakeType = shakeType;
         return this;
     }
 
-    public ShakeBuilder addExtraIngredient(ExtraIngredients extraIngredient){
+    public ShakeBuilder addExtraIngredient(ExtraIngredients extraIngredient) {
 
-        if(!extraIngredients.contains(extraIngredient)){
+        if (!extraIngredients.contains(extraIngredient)) {
             extraIngredients.add(extraIngredient);
-            System.out.println("Topping "+extraIngredient.name() + " Added");
-        }
-        else System.out.println("Error : Already Added "+extraIngredient.name());
+            System.out.println("Topping " + extraIngredient.name() + " Added");
+        } else System.out.println("Error : Already Added " + extraIngredient.name());
         return this;
     }
-    public ShakeBuilder makeLactoseFree(){
-        if(!extraIngredients.contains(ExtraIngredients.AlmondMilk)){
+
+    public ShakeBuilder makeLactoseFree() {
+        if (!extraIngredients.contains(ExtraIngredients.AlmondMilk)) {
             extraIngredients.add(ExtraIngredients.AlmondMilk);
-            System.out.println("Your shake is now Lactose Free,Replaced "+Ingredients.Milk+ " by" +ExtraIngredients.AlmondMilk);
-        }
-        else System.out.println("Error : Already Lactose Free with "+ExtraIngredients.AlmondMilk.name());
+            System.out.println("Your shake is now Lactose Free,Replaced " + Ingredients.Milk + " by " + ExtraIngredients.AlmondMilk);
+        } else System.out.println("Error : Already Lactose Free with " + ExtraIngredients.AlmondMilk.name());
         return this;
     }
-    public Shake produceShake(){
-        switch (shakeType){
+
+    /**
+     * Calling of this method marks completion of shake-building process,
+     * All other Methods Except this method return a ShakeBuilder
+     **/
+    public Shake produceShake() {
+        switch (shakeType) {
             case ChocolateShake:
                 return new ChocolateShake(this.extraIngredients);
             case CoffeeShake:
@@ -52,7 +59,7 @@ public class ShakeBuilder{
             case ZeroShake:
                 return new ZeroShake(this.extraIngredients);
         }
-        System.out.println("Error : Please Specify Shake Type!");
+        System.out.println("Error : Please Specify Shake Type!"); //ensures no shake can be created without calling setShakeType()
         return null;
     }
 }

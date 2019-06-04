@@ -1,7 +1,5 @@
 package builder.shakes;
 
-import builder.ShakeType;
-
 import java.util.ArrayList;
 import java.util.List;
 

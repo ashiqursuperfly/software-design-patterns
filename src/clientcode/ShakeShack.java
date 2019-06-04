@@ -1,4 +1,4 @@
-package builder;
+package clientcode;
 
 import builder.shakes.*;
 
@@ -40,7 +40,7 @@ public class ShakeShack  {
     }
 
     public static Shake addAShakeInCurrentOrder(int choice) {
-        ShakeShack.Builder builder = ShakeShack.Builder.newInstance();
+        ShakeBuilder builder = ShakeBuilder.newInstance();
         switch (choice){
             case 1:
                 builder.setShakeType(ShakeType.ChocolateShake);
@@ -103,64 +103,29 @@ public class ShakeShack  {
     public static void printOrder(List<Shake> newOrder) {
         System.out.println(":: Your Order Details ::");
         System.out.println("Shake--BaseIngredients--Extras--BasePrice--ExtraPrice--TotalPrice");
-        for (Shake s :
-                newOrder) {
-            System.out.println(s);
+        for (int i=0;i<newOrder.size();i++){
+            System.out.println("["+i+"] "+newOrder.get(i));
         }
     }
 
-    public static class Builder{
 
-        private ShakeType shakeType;
-        private List<ExtraIngredients> extraIngredients;
 
-        public Builder() {
-            extraIngredients = new ArrayList<>();
-        }
+}
+class ShakeShackClientCode {
 
-        public static Builder newInstance()
-        {
-            return new Builder();
-        }
-
-        public Builder setShakeType(ShakeType shakeType) {
-            this.shakeType = shakeType;
-            return this;
-        }
-
-        public Builder addExtraIngredient(ExtraIngredients extraIngredient){
-
-            if(!extraIngredients.contains(extraIngredient)){
-                extraIngredients.add(extraIngredient);
-                System.out.println("Topping "+extraIngredient.name() + " Added");
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        while (true){
+            System.out.println("Enter 'O' to open an Order");
+            if(sc.nextLine().equalsIgnoreCase("O")){
+                ShakeShack.printOrder(ShakeShack.createNewOrder());
             }
-            else System.out.println("Error : Already Added "+extraIngredient.name());
-            return this;
+            else System.out.println("Invalid Input");
         }
-        public Builder makeLactoseFree(){
-            if(!extraIngredients.contains(ExtraIngredients.AlmondMilk)){
-                extraIngredients.add(ExtraIngredients.AlmondMilk);
-                System.out.println("Your shake is now Lactose Free,Replaced milk by "+ExtraIngredients.AlmondMilk);
-            }
-            else System.out.println("Error : Already Lactose Free with "+ExtraIngredients.AlmondMilk.name());
-            return this;
-        }
-        public Shake produceShake(){
-            switch (shakeType){
-                case ChocolateShake:
-                    return new ChocolateShake(this.extraIngredients);
-                case CoffeeShake:
-                    return new CoffeeShake(this.extraIngredients);
-                case VanillaShake:
-                    return new VanillaShake(this.extraIngredients);
-                case StrawberryShake:
-                    return new StrawberryShake(this.extraIngredients);
-                case ZeroShake:
-                    return new ZeroShake(this.extraIngredients);
-            }
-            System.out.println("Error : Please Specify Shake Type!");
-            return null;
-        }
+
+//	    System.out.println(ShakeShack.Builder.newInstance().setShakeType(ShakeType.ChocolateShake)
+//                .addExtraIngredient(ExtraIngredients.Cookie).addExtraIngredient(ExtraIngredients.AlmondMilk).produceShake());
     }
+
 
 }

@@ -4,8 +4,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Marking this class abstract prevents a developer from instantiating the class,
- * since it has missing functionality.
+ * TODO: To add a new Shake :-> 1.Extend this class 2.Implement the abstract method(s)
+ * 3.Call the super constructor Shake(ShakeType,List<ExtraIngredients>) with the appropriate ShakeType
+ * Note: Marking this class abstract prevents a developer from instantiating the class.
+ * Therefore,no Shake can be created without the above mentioned steps.
  **/
 public abstract class Shake {
 
@@ -72,7 +74,6 @@ public abstract class Shake {
             }
             if (extraPriceString.length() > 0) extraPriceString.deleteCharAt(extraPriceString.length() - 1);
         }
-
 
         return getClass().getSimpleName() + ": " + baseIngredientsString.toString() +
                 " | " + extraIngredientsString.toString() + " | " + shakeType.basePrice +

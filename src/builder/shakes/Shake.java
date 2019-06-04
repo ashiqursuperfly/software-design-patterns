@@ -8,6 +8,8 @@ import java.util.List;
  * 3.Call the super constructor Shake(ShakeType,List<ExtraIngredients>) with the appropriate ShakeType
  * Note: Marking this class abstract prevents a developer from instantiating the class.
  * Therefore,no Shake can be created without the above mentioned steps.
+ * Also, it allows simple extension of the design to create new Shakes by reusing the code for the general
+ * behaviour of the shakes.This wont be possible if we used an Shake Interface.
  **/
 public abstract class Shake {
 
@@ -54,15 +56,18 @@ public abstract class Shake {
         int totalPrice = shakeType.basePrice;
         StringBuilder baseIngredientsString = new StringBuilder(),
                 extraIngredientsString = new StringBuilder(), extraPriceString = new StringBuilder();
+
         for (Ingredients i :
                 ingredients) {
             baseIngredientsString.append(i.name()).append(",");
         }
         baseIngredientsString.deleteCharAt(baseIngredientsString.length() - 1);
+
         for (ExtraIngredients i :
                 extraIngredients) {
             extraIngredientsString.append(i.name()).append(",");
         }
+
         if (extraIngredientsString.length() > 0)
             extraIngredientsString.deleteCharAt(extraIngredientsString.length() - 1);
 

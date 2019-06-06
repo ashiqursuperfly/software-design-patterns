@@ -1,4 +1,4 @@
-package builder.shakes;
+package builder;
 
 public enum Ingredients {
     Milk, Sugar, Sweetener, ChocolateSyrup, ChocolateIceCream, StrawberrySyrup,

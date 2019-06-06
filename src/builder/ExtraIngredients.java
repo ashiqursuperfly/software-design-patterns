@@ -1,4 +1,4 @@
-package builder.shakes;
+package builder;
 
 public enum ExtraIngredients {
 

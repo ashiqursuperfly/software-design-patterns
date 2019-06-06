@@ -1,6 +1,6 @@
 package clientcode;
 
-import builder.shakes.*;
+import builder.*;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -65,7 +65,7 @@ public class ShakeShack {
         }
         Scanner sc = new Scanner(System.in);
         while (true) {
-            System.out.println("Do you want to 1.Make your Shake Lactose Free\n 2.AddTopping ? 3.Dont Need Anything Else");
+            System.out.println("Do you want to 1.Make your Shake Lactose Free\n 2.AddTopping ? 3.Confirm This Shake");
             choice = sc.nextInt();
             if (choice == 1) {
                 builder.makeLactoseFree();

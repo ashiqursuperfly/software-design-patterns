@@ -9,24 +9,24 @@ public class ComputerSystem {
 
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
-        AbstractComputerFactory factory;
+        AbstractFactory factory;
         Computer computer;
         while (true){
             System.out.println("Pick A Computer: 1.ComputerA 2.ComputerB 3.ComputerC");
             int c = sc.nextInt();
             switch (c){
                 case 1:
-                    factory = new ComputerFactoryA();
+                    factory = new FactoryA();
                     computer = factory.createComputer();
                     pickAndDisplayShape(computer);
                     break;
                 case 2:
-                    factory = new ComputerFactoryB();
+                    factory = new FactoryB();
                     computer = factory.createComputer();
                     pickAndDisplayShape(computer);
                     break;
                 case 3:
-                    factory = new ComputerFactoryC();
+                    factory = new FactoryC();
                     computer = factory.createComputer();
                     pickAndDisplayShape(computer);
                     break;

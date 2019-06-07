@@ -1,13 +1,12 @@
 package abstract_factory;
 
-public class ComputerFactoryA implements AbstractComputerFactory {
+public class FactoryB implements AbstractFactory {
 
-    private String cpu="CPU-A",mmu="MMU-A",resolution="200x200";
+    private String cpu="CPU-B",mmu="MMU-B",resolution="350x250";
 
     @Override
     public Computer createComputer() {
         return new Computer(cpu,mmu,resolution);
     }
-
 
 }

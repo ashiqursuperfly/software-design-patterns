@@ -1,8 +1,8 @@
 package abstract_factory;
 
-public class ComputerFactoryC implements AbstractComputerFactory {
+public class FactoryA implements AbstractFactory {
 
-    private String cpu="CPU-C",mmu="MMU-C",resolution="550x430";
+    private String cpu="CPU-A",mmu="MMU-A",resolution="200x200";
 
     @Override
     public Computer createComputer() {

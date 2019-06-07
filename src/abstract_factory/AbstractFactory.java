@@ -1,5 +1,5 @@
 package abstract_factory;
 
-public interface AbstractComputerFactory {
+public interface AbstractFactory {
     Computer createComputer();
 }

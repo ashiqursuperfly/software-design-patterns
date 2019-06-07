@@ -2,7 +2,8 @@ package builder;
 
 import java.util.ArrayList;
 import java.util.List;
-
+/** Note:We dont need a Director Class here since the sequence in which each building process gets done is unimportant here
+ * therefore,directing can be done in the client code. Real World Example of this is Java's StringBuilder Class **/
 public class ShakeBuilder {
 
     private ShakeType shakeType;
@@ -26,11 +27,26 @@ public class ShakeBuilder {
     }
 
     public ShakeBuilder addExtraIngredient(ExtraIngredients extraIngredient) {
-
         if (!extraIngredients.contains(extraIngredient)) {
             extraIngredients.add(extraIngredient);
             System.out.println("Topping " + extraIngredient.name() + " Added");
         } else System.out.println("Error : Already Added " + extraIngredient.name());
+        return this;
+    }
+    public ShakeBuilder removeExtraIngredient(ExtraIngredients extraIngredient) {
+        if (!extraIngredients.contains(extraIngredient)) {
+            System.out.println("No Problems :"+ extraIngredient.name()+" was not added anyway!");
+        } else {
+            extraIngredients.remove(extraIngredient);
+            System.out.println("Topping " + extraIngredient.name() + " removed");
+        }
+        return this;
+    }
+    public ShakeBuilder makeLactoseFull() {
+        if (extraIngredients.contains(ExtraIngredients.AlmondMilk)) {
+            extraIngredients.remove(ExtraIngredients.AlmondMilk);
+            System.out.println("Replaced " + ExtraIngredients.AlmondMilk.name() + " by " + Ingredients.Milk.name());
+        } else System.out.println("Already Contains Lactose Ingredient " + Ingredients.Milk.name());
         return this;
     }
 

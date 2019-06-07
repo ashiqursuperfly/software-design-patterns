@@ -65,19 +65,33 @@ public class ShakeShack {
         }
         Scanner sc = new Scanner(System.in);
         while (true) {
-            System.out.println("Do you want to 1.Make your Shake Lactose Free\n 2.AddTopping ? 3.Confirm This Shake");
+            System.out.println("Do you want to 1.Make your Shake Lactose Free/Full\n 2.Add/RemoveTopping ? 3.Confirm This Shake");
             choice = sc.nextInt();
             if (choice == 1) {
-                builder.makeLactoseFree();
+                System.out.println("1.Make Lactose Free 2.Remove Lactose Free Ingredient 3.Cancel");
+                Scanner sc4 = new Scanner(System.in);
+                int c4 = sc4.nextInt();
+                if(c4==1) builder.makeLactoseFree();
+                else if(c4 == 2) builder.makeLactoseFull();
             } else if (choice == 2) {
-                System.out.println("Options : 1.Cookie(+40Tk) 2.Candy(+50Tk)");
+                System.out.println("Options : 1.Cookie(+40Tk) 2.Candy(+50Tk) 3.Remove Topping");
                 Scanner sc2 = new Scanner(System.in);
                 int choice2 = sc2.nextInt();
                 if (choice2 == 1) {
                     builder.addExtraIngredient(ExtraIngredients.Cookie);
                 } else if (choice2 == 2) {
                     builder.addExtraIngredient(ExtraIngredients.Candy);
-                } else {
+                }
+                else if (choice2 == 3) {
+                    System.out.println("Remove: 1.Cookie(+40Tk) 2.Candy(+50Tk) 3.Cancel");
+                    Scanner sc3 = new Scanner(System.in);
+                    int c3 = sc3.nextInt();
+                    if(c3==1)
+                        builder.removeExtraIngredient(ExtraIngredients.Cookie);
+                    else if(c3==2)
+                        builder.removeExtraIngredient(ExtraIngredients.Candy);
+                }
+                else {
                     System.out.println("Error :Invalid Topping Choice!");
                 }
 

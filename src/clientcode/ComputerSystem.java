@@ -6,12 +6,45 @@ import abstract_factory.shapes.*;
 import java.util.Scanner;
 
 public class ComputerSystem {
+
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        AbstractComputerFactory factory;
+        Computer computer;
+        while (true){
+            System.out.println("Pick A Computer: 1.ComputerA 2.ComputerB 3.ComputerC");
+            int c = sc.nextInt();
+            switch (c){
+                case 1:
+                    factory = new ComputerFactoryA();
+                    computer = factory.createComputer();
+                    pickAndDisplayShape(computer);
+                    break;
+                case 2:
+                    factory = new ComputerFactoryB();
+                    computer = factory.createComputer();
+                    pickAndDisplayShape(computer);
+                    break;
+                case 3:
+                    factory = new ComputerFactoryC();
+                    computer = factory.createComputer();
+                    pickAndDisplayShape(computer);
+                    break;
+                default:
+                    System.out.println("Invalid Computer Factory !");
+                    break;
+
+            }
+        }
+    }
+
     private static Shape inputCircle(){
         Scanner sc = new Scanner(System.in);
         System.out.println("Enter radius");
         double radius = sc.nextDouble();
         return new Circle(radius);
     }
+
     private static Shape inputTriangle(){
         Scanner sc = new Scanner(System.in);
         System.out.println("Enter Length of Side 1");
@@ -26,6 +59,7 @@ public class ComputerSystem {
         return new Triangle(side1,side2,side3);
 
     }
+
     private static Shape inputSquare() {
         Scanner sc = new Scanner(System.in);
         System.out.println("Enter Length of Side");
@@ -69,35 +103,4 @@ public class ComputerSystem {
         }
     }
 
-
-
-    public static void main(String[] args) {
-        Scanner sc = new Scanner(System.in);
-        ComputerFactoryA factoryA = new ComputerFactoryA();
-        ComputerFactoryB factoryB = new ComputerFactoryB();
-        ComputerFactoryC factoryC = new ComputerFactoryC();
-        Computer computer;
-        while (true){
-            System.out.println("Pick A Computer: 1.ComputerA 2.ComputerB 3.ComputerC");
-            int c = sc.nextInt();
-            switch (c){
-                case 1:
-                    computer = factoryA.createComputer();
-                    pickAndDisplayShape(computer);
-                    break;
-                case 2:
-                    computer = factoryB.createComputer();
-                    pickAndDisplayShape(computer);
-                    break;
-                case 3:
-                    computer = factoryC.createComputer();
-                    pickAndDisplayShape(computer);
-                    break;
-                default:
-                    System.out.println("Invalid Computer Factory !");
-                    break;
-
-            }
-        }
-    }
 }

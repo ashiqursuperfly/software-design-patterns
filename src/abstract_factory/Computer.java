@@ -5,6 +5,18 @@ import abstract_factory.shapes.Shape;
 public class Computer {
     private String cpu,mmu,resolution;
 
+    public String getCpu() {
+        return cpu;
+    }
+
+    public String getMmu() {
+        return mmu;
+    }
+
+    public String getResolution() {
+        return resolution;
+    }
+
     public Computer(String cpu, String mmu, String resolution) {
         this.cpu = cpu;
         this.mmu = mmu;

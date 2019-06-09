@@ -12,6 +12,7 @@ import java.util.List;
 import java.util.Scanner;
 
 class ShakeShack {
+
     public static List<Shake> createNewOrder() {
         Scanner sc = new Scanner(System.in);
         List<Shake> items = new ArrayList<>();
@@ -138,7 +139,6 @@ class ShakeShack {
             System.out.println("[" + i + "] " + newOrder.get(i));
         }
     }
-
 
 }
 

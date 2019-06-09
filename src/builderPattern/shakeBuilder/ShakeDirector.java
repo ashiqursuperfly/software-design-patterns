@@ -1,7 +1,6 @@
 package builderPattern.shakeBuilder;
 
 import builderPattern.ingredients.BaseIngredients;
-import builderPattern.ingredients.ExtraIngredients;
 import builderPattern.ingredients.Ingredient;
 
 import java.util.List;
@@ -28,7 +27,7 @@ public class ShakeDirector {
      * and reuse specific configurations of products.
      **/
     public Shake produceShake(ShakeType shakeType) {
-        ShakeBuilder shakeBuilder = ShakeBuilder.getBuilder();
+        ShakeBuilder shakeBuilder = new ShakeBuilder();
         switch (shakeType) {
             case ChocolateShake:
                 shakeBuilder.setShakeType(ShakeType.ChocolateShake)

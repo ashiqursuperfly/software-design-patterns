@@ -13,13 +13,9 @@ class ShakeBuilder implements ShopItemBuilder {
     private List<Ingredient> extraIngredients;
     private List<Ingredient> ingredients;
 
-    private ShakeBuilder() {
+    public ShakeBuilder() {
         ingredients = new ArrayList<>();
         extraIngredients = new ArrayList<>();
-    }
-
-    public static ShakeBuilder getBuilder() {
-        return new ShakeBuilder();
     }
 
     public ShakeType getShakeType() {

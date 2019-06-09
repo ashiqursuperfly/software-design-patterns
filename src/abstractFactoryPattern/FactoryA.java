@@ -1,4 +1,4 @@
-package abstract_factory;
+package abstractFactoryPattern;
 
 public class FactoryA implements AbstractFactory {
 

@@ -1,6 +1,6 @@
-package abstract_factory;
+package abstractFactoryPattern;
 
-import abstract_factory.shapes.Shape;
+import abstractFactoryPattern.shapes.Shape;
 
 public class Computer {
     private String cpu,mmu,resolution;

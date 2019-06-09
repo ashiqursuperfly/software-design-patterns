@@ -1,6 +1,6 @@
-package builder;
+package builderPattern.ingredients;
 
-public enum ExtraIngredients {
+public enum ExtraIngredients implements Ingredient {
 
     AlmondMilk(60),Candy(50), Cookie(40);
 

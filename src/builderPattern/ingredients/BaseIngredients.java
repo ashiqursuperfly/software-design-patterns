@@ -1,6 +1,6 @@
-package builder;
+package builderPattern.ingredients;
 
-public enum Ingredients {
+public enum BaseIngredients implements Ingredient {
     Milk, Sugar, Sweetener, ChocolateSyrup, ChocolateIceCream, StrawberrySyrup,
     StrawberryIceCream, Coffee, Jello, SugarFreeJello, VanillaFlavouring
 }

@@ -1,6 +1,11 @@
-package clientcode;
+package clientCode;
 
-import builder.*;
+import builderPattern.ingredients.BaseIngredients;
+import builderPattern.ingredients.ExtraIngredients;
+import builderPattern.ingredients.Ingredient;
+import builderPattern.shakeBuilder.Shake;
+import builderPattern.shakeBuilder.ShakeDirector;
+import builderPattern.shakeBuilder.ShakeType;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -36,26 +41,26 @@ public class ShakeShack {
     }
 
     public static Shake addAShakeInCurrentOrder(int choice) {
-        ShakeBuilder builder = ShakeBuilder.builder();
+        ShakeType shakeType = null;
         switch (choice) {
             case 1:
-                builder.setShakeType(ShakeType.ChocolateShake);
+                shakeType = ShakeType.ChocolateShake;
                 System.out.println("Added new shake " + ShakeType.ChocolateShake.name());
                 break;
             case 2:
-                builder.setShakeType(ShakeType.CoffeeShake);
+                shakeType = ShakeType.CoffeeShake;
                 System.out.println("Added new shake " + ShakeType.CoffeeShake.name());
                 break;
             case 3:
-                builder.setShakeType(ShakeType.StrawberryShake);
+                shakeType = ShakeType.StrawberryShake;
                 System.out.println("Added new shake " + ShakeType.StrawberryShake.name());
                 break;
             case 4:
-                builder.setShakeType(ShakeType.VanillaShake);
+                shakeType = ShakeType.VanillaShake;
                 System.out.println("Added new shake " + ShakeType.VanillaShake.name());
                 break;
             case 5:
-                builder.setShakeType(ShakeType.ZeroShake);
+                shakeType = ShakeType.ZeroShake;
                 System.out.println("Added new shake " + ShakeType.ZeroShake.name());
                 break;
             default:
@@ -64,39 +69,53 @@ public class ShakeShack {
 
         }
         Scanner sc = new Scanner(System.in);
+        boolean isLactoseFree = false;
+        List<Ingredient> extraIngredients = new ArrayList<>();
         while (true) {
-            System.out.println("Do you want to 1.Make your Shake Lactose Free/Full\n 2.Add/RemoveTopping ? 3.Confirm This Shake");
+            System.out.println("Do you want to 1.Make your Shake Lactose Free/Full\n 2.Add/RemoveTopping ? 3.Confirm This Shake(You cant undo this)");
             choice = sc.nextInt();
             if (choice == 1) {
                 System.out.println("1.Make Lactose Free 2.Remove Lactose Free Ingredient 3.Cancel");
                 Scanner sc4 = new Scanner(System.in);
                 int c4 = sc4.nextInt();
-                if(c4==1) builder.makeLactoseFree();
-                else if(c4 == 2) builder.makeLactoseFull();
+                if (c4 == 1) {
+                    isLactoseFree = true;
+                    System.out.println("Your shake is now Lactose Free,Replaced " + BaseIngredients.Milk + " by " + ExtraIngredients.AlmondMilk);
+                } else if (c4 == 2) {
+                    isLactoseFree = false;
+                    System.out.println("Replaced " + ExtraIngredients.AlmondMilk.name() + " by " + BaseIngredients.Milk.name());
+                }
             } else if (choice == 2) {
-                System.out.println("Options : 1.Cookie(+40Tk) 2.Candy(+50Tk) 3.Remove Topping");
+                System.out.println("Options : 1.Cookie(+40) 2.Candy(+50) 3.Remove Topping");
                 Scanner sc2 = new Scanner(System.in);
                 int choice2 = sc2.nextInt();
                 if (choice2 == 1) {
-                    builder.addExtraIngredient(ExtraIngredients.Cookie);
+                    extraIngredients.add(ExtraIngredients.Cookie);
+                    System.out.println("Topping " + ExtraIngredients.Cookie.name() + " Added");
                 } else if (choice2 == 2) {
-                    builder.addExtraIngredient(ExtraIngredients.Candy);
-                }
-                else if (choice2 == 3) {
+                    extraIngredients.add(ExtraIngredients.Candy);
+                    System.out.println("Topping " + ExtraIngredients.Candy.name() + " Added");
+                } else if (choice2 == 3) {
                     System.out.println("Remove: 1.Cookie(+40Tk) 2.Candy(+50Tk) 3.Cancel");
                     Scanner sc3 = new Scanner(System.in);
                     int c3 = sc3.nextInt();
-                    if(c3==1)
-                        builder.removeExtraIngredient(ExtraIngredients.Cookie);
-                    else if(c3==2)
-                        builder.removeExtraIngredient(ExtraIngredients.Candy);
-                }
-                else {
+                    if (c3 == 1) {
+                        extraIngredients.remove(ExtraIngredients.Cookie);
+                        System.out.println("Topping " + ExtraIngredients.Cookie + " removed");
+                    } else if (c3 == 2) {
+                        extraIngredients.remove(ExtraIngredients.Candy);
+                        System.out.println("Topping " + ExtraIngredients.Candy + " removed");
+                    }
+                } else {
                     System.out.println("Error :Invalid Topping Choice!");
                 }
 
             } else if (choice == 3) {
-                return builder.produceShake();
+                System.out.println("Confirmed 1 Shake " + shakeType + " in current order");
+
+                ShakeDirector shakeDirector = new ShakeDirector(extraIngredients, isLactoseFree);
+
+                return shakeDirector.produceShake(shakeType); //End of Shake Building Process for this Shake.
             } else {
                 System.out.println("Error :Invalid Additional Choice!");
             }
@@ -120,6 +139,14 @@ class ShakeShackClientCode {
 
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
+
+        /** The clientCode only needs to create a ShakeDirector and call ProduceShake
+         * e.g :
+         * ShakeDirector shakeDirector = new ShakeDirector();
+         * shakeDirector.produceShake(ShakeType.ChocolateShake);
+         * **/
+
+
         while (true) {
             System.out.println("Enter 'O' to open an Order");
             if (sc.nextLine().equalsIgnoreCase("O")) {
@@ -127,8 +154,6 @@ class ShakeShackClientCode {
             } else System.out.println("Invalid Input");
         }
 
-//	    System.out.println(ShakeShack.Builder.builder().setShakeType(ShakeType.ChocolateShake)
-//                .addExtraIngredient(ExtraIngredients.Cookie).addExtraIngredient(ExtraIngredients.AlmondMilk).produceShake());
     }
 
 

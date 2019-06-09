@@ -1,7 +1,7 @@
-package clientcode;
+package clientCode;
 
-import abstract_factory.*;
-import abstract_factory.shapes.*;
+import abstractFactoryPattern.*;
+import abstractFactoryPattern.shapes.*;
 
 import java.util.Scanner;
 
@@ -11,10 +11,10 @@ public class ComputerSystem {
         Scanner sc = new Scanner(System.in);
         AbstractFactory factory;
         Computer computer;
-        while (true){
+        while (true) {
             System.out.println("Pick A Computer: 1.ComputerA 2.ComputerB 3.ComputerC");
             int c = sc.nextInt();
-            switch (c){
+            switch (c) {
                 case 1:
                     factory = new FactoryA();
                     computer = factory.createComputer();
@@ -38,14 +38,14 @@ public class ComputerSystem {
         }
     }
 
-    private static Shape inputCircle(){
+    private static Shape inputCircle() {
         Scanner sc = new Scanner(System.in);
         System.out.println("Enter radius");
         double radius = sc.nextDouble();
         return new Circle(radius);
     }
 
-    private static Shape inputTriangle(){
+    private static Shape inputTriangle() {
         Scanner sc = new Scanner(System.in);
         System.out.println("Enter Length of Side 1");
         double side1 = sc.nextDouble();
@@ -56,7 +56,7 @@ public class ComputerSystem {
         System.out.println("Enter Length of Side 3");
         double side3 = sc.nextDouble();
 
-        return new Triangle(side1,side2,side3);
+        return new Triangle(side1, side2, side3);
 
     }
 
@@ -74,15 +74,15 @@ public class ComputerSystem {
 
         System.out.println("Enter width");
         double width = sc.nextDouble();
-        return new Rectangle(length,width);
+        return new Rectangle(length, width);
     }
 
-    private static void pickAndDisplayShape(Computer computer){
-        while (true){
+    private static void pickAndDisplayShape(Computer computer) {
+        while (true) {
             System.out.println("Pick A Shape to Draw 1.Triangle 2.Rectangle 3.Circle 4.Square 5.Turn Off Computer");
             Scanner sc2 = new Scanner(System.in);
             int c2 = sc2.nextInt();
-            switch (c2){
+            switch (c2) {
                 case 1:
                     computer.display(inputTriangle());
                     break;

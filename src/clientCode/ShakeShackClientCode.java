@@ -11,7 +11,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
-public class ShakeShack {
+class ShakeShack {
     public static List<Shake> createNewOrder() {
         Scanner sc = new Scanner(System.in);
         List<Shake> items = new ArrayList<>();
@@ -22,7 +22,8 @@ public class ShakeShack {
             if (choice.equalsIgnoreCase("1") || choice.equalsIgnoreCase("2")
                     || choice.equalsIgnoreCase("3") || choice.equalsIgnoreCase("4")
                     || choice.equalsIgnoreCase("5")) {
-                items.add(addAShakeInCurrentOrder(Integer.parseInt(choice)));
+                Shake newShake = addAShakeInCurrentOrder(Integer.parseInt(choice));
+                if(newShake!=null)items.add(newShake);
             } else if (choice.equalsIgnoreCase("E")) {
                 if (items.size() != 0) {
                     return items;
@@ -72,7 +73,8 @@ public class ShakeShack {
         boolean isLactoseFree = false;
         List<Ingredient> extraIngredients = new ArrayList<>();
         while (true) {
-            System.out.println("Do you want to 1.Make your Shake Lactose Free/Full\n 2.Add/RemoveTopping ? 3.Confirm This Shake(You cant undo this)");
+            System.out.println("Do you want to 1.Make your Shake Lactose Free/Full\n 2.Add/RemoveTopping ? 3.Confirm This Shake(You cant undo this)\n" +
+                    "4.Cancel This Shake");
             choice = sc.nextInt();
             if (choice == 1) {
                 System.out.println("1.Make Lactose Free 2.Remove Lactose Free Ingredient 3.Cancel");
@@ -116,7 +118,12 @@ public class ShakeShack {
                 ShakeDirector shakeDirector = new ShakeDirector(extraIngredients, isLactoseFree);
 
                 return shakeDirector.produceShake(shakeType); //End of Shake Building Process for this Shake.
-            } else {
+            }
+            else if (choice == 4) {
+                System.out.println("Cancelled 1 " + shakeType + " from current order");
+                return null;
+            }
+            else {
                 System.out.println("Error :Invalid Additional Choice!");
             }
 
@@ -135,17 +142,16 @@ public class ShakeShack {
 
 }
 
-class ShakeShackClientCode {
+public class ShakeShackClientCode {
 
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
 
-        /** The clientCode only needs to create a ShakeDirector and call ProduceShake
-         * e.g :
-         * ShakeDirector shakeDirector = new ShakeDirector();
-         * shakeDirector.produceShake(ShakeType.ChocolateShake);
-         * **/
-
+        /*The clientCode only needs to create a ShakeDirector and call ProduceShake
+          e.g :
+          ShakeDirector shakeDirector = new ShakeDirector();
+          shakeDirector.produceShake(ShakeType.ChocolateShake);
+          **/
 
         while (true) {
             System.out.println("Enter 'O' to open an Order");

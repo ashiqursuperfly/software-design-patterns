@@ -1,6 +1,8 @@
-package builderPattern.ingredients;
+package builderPattern.shake.shakeIngredient;
 
-public enum BaseIngredients implements Ingredient {
+import builderPattern.Ingredient;
+
+public enum ShakeBaseIngredients implements Ingredient {
     Milk, Sugar, Sweetener, ChocolateSyrup, ChocolateIceCream, StrawberrySyrup,
     StrawberryIceCream, Coffee, Jello, SugarFreeJello, VanillaFlavouring
 }

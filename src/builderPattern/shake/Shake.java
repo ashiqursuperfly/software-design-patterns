@@ -1,7 +1,7 @@
-package builderPattern.shakeBuilder;
+package builderPattern.shake;
 
-import builderPattern.ingredients.ExtraIngredients;
-import builderPattern.ingredients.Ingredient;
+import builderPattern.shake.shakeIngredient.ShakeExtraIngredients;
+import builderPattern.Ingredient;
 
 import java.util.List;
 
@@ -40,8 +40,8 @@ public class Shake {
         if (extraIngredients.size() != 0) {
             for (Ingredient i :
                     extraIngredients) {
-                if (i instanceof ExtraIngredients) {
-                    ExtraIngredients ei = (ExtraIngredients) i;
+                if (i instanceof ShakeExtraIngredients) {
+                    ShakeExtraIngredients ei = (ShakeExtraIngredients) i;
                     totalPrice += ei.addedPrice;
                     extraPriceString.append(ei.toString()).append(" ").append(ei.addedPrice).append(",");
                 }

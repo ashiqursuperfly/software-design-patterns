@@ -1,8 +1,8 @@
-package builderPattern.shakeBuilder;
+package builderPattern.shake;
 
 import builderPattern.ShopItemBuilder;
-import builderPattern.ingredients.ExtraIngredients;
-import builderPattern.ingredients.Ingredient;
+import builderPattern.shake.shakeIngredient.ShakeExtraIngredients;
+import builderPattern.Ingredient;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -38,7 +38,7 @@ class ShakeBuilder implements ShopItemBuilder {
     @Override
     public ShakeBuilder addIngredient(Ingredient ingredient) {
 
-        if (ingredient instanceof ExtraIngredients) {
+        if (ingredient instanceof ShakeExtraIngredients) {
             if (!extraIngredients.contains(ingredient)) {
                 extraIngredients.add(ingredient);
             }
@@ -52,7 +52,7 @@ class ShakeBuilder implements ShopItemBuilder {
 
     @Override
     public ShakeBuilder removeIngredient(Ingredient ingredient) {
-        if (ingredient instanceof ExtraIngredients) {
+        if (ingredient instanceof ShakeExtraIngredients) {
             extraIngredients.remove(ingredient);
         } else {
             ingredients.remove(ingredient);
@@ -62,8 +62,8 @@ class ShakeBuilder implements ShopItemBuilder {
     }
 
     public ShakeBuilder makeLactoseFree() {
-        if (!extraIngredients.contains(ExtraIngredients.AlmondMilk)) {
-            extraIngredients.add(ExtraIngredients.AlmondMilk);
+        if (!extraIngredients.contains(ShakeExtraIngredients.AlmondMilk)) {
+            extraIngredients.add(ShakeExtraIngredients.AlmondMilk);
         }
         return this;
     }

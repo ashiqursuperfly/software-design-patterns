@@ -1,7 +1,7 @@
-package builderPattern.shakeBuilder;
+package builderPattern.shake;
 
-import builderPattern.ingredients.BaseIngredients;
-import builderPattern.ingredients.Ingredient;
+import builderPattern.shake.shakeIngredient.ShakeBaseIngredients;
+import builderPattern.Ingredient;
 
 import java.util.List;
 
@@ -31,38 +31,38 @@ public class ShakeDirector {
         switch (shakeType) {
             case ChocolateShake:
                 shakeBuilder.setShakeType(ShakeType.ChocolateShake)
-                        .addIngredient(BaseIngredients.Milk)
-                        .addIngredient(BaseIngredients.Sugar)
-                        .addIngredient(BaseIngredients.ChocolateIceCream)
-                        .addIngredient(BaseIngredients.ChocolateSyrup);
+                        .addIngredient(ShakeBaseIngredients.Milk)
+                        .addIngredient(ShakeBaseIngredients.Sugar)
+                        .addIngredient(ShakeBaseIngredients.ChocolateIceCream)
+                        .addIngredient(ShakeBaseIngredients.ChocolateSyrup);
                 break;
             case CoffeeShake:
                 shakeBuilder.setShakeType(ShakeType.CoffeeShake)
-                        .addIngredient(BaseIngredients.Milk)
-                        .addIngredient(BaseIngredients.Sugar)
-                        .addIngredient(BaseIngredients.Coffee)
-                        .addIngredient(BaseIngredients.Jello);
+                        .addIngredient(ShakeBaseIngredients.Milk)
+                        .addIngredient(ShakeBaseIngredients.Sugar)
+                        .addIngredient(ShakeBaseIngredients.Coffee)
+                        .addIngredient(ShakeBaseIngredients.Jello);
                 break;
             case VanillaShake:
                 shakeBuilder.setShakeType(ShakeType.VanillaShake)
-                        .addIngredient(BaseIngredients.Milk)
-                        .addIngredient(BaseIngredients.Sugar)
-                        .addIngredient(BaseIngredients.VanillaFlavouring)
-                        .addIngredient(BaseIngredients.Jello);
+                        .addIngredient(ShakeBaseIngredients.Milk)
+                        .addIngredient(ShakeBaseIngredients.Sugar)
+                        .addIngredient(ShakeBaseIngredients.VanillaFlavouring)
+                        .addIngredient(ShakeBaseIngredients.Jello);
                 break;
             case StrawberryShake:
                 shakeBuilder.setShakeType(ShakeType.StrawberryShake)
-                        .addIngredient(BaseIngredients.Milk)
-                        .addIngredient(BaseIngredients.Sugar)
-                        .addIngredient(BaseIngredients.StrawberryIceCream)
-                        .addIngredient(BaseIngredients.StrawberrySyrup);
+                        .addIngredient(ShakeBaseIngredients.Milk)
+                        .addIngredient(ShakeBaseIngredients.Sugar)
+                        .addIngredient(ShakeBaseIngredients.StrawberryIceCream)
+                        .addIngredient(ShakeBaseIngredients.StrawberrySyrup);
                 break;
             case ZeroShake:
                 shakeBuilder.setShakeType(ShakeType.ZeroShake)
-                        .addIngredient(BaseIngredients.Milk)
-                        .addIngredient(BaseIngredients.Sweetener)
-                        .addIngredient(BaseIngredients.VanillaFlavouring)
-                        .addIngredient(BaseIngredients.SugarFreeJello);
+                        .addIngredient(ShakeBaseIngredients.Milk)
+                        .addIngredient(ShakeBaseIngredients.Sweetener)
+                        .addIngredient(ShakeBaseIngredients.VanillaFlavouring)
+                        .addIngredient(ShakeBaseIngredients.SugarFreeJello);
                 break;
         }
         if (extraIngredients != null && extraIngredients.size() != 0) {

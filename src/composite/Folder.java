@@ -2,6 +2,7 @@ package composite;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 public class Folder implements CompositeFileSystemComponent {
 
@@ -19,6 +20,10 @@ public class Folder implements CompositeFileSystemComponent {
     @Override
     public void setHeight(int height) {
         this.height = height;
+        for (FileSystemComponent c :
+                components) {
+            c.setHeight(height+1);
+        }
     }
 
     public Folder(String name) {
@@ -39,6 +44,13 @@ public class Folder implements CompositeFileSystemComponent {
             }
         }
         else{
+            if(components.contains(child)){
+                try {
+                    throw new Exception(type+" Already Contains "+child.getName()+" "+child.getType());
+                } catch (Exception e) {
+                    return;
+                }
+            }
             child.setParent(this);
             components.add(child);
             componentCount++;
@@ -63,7 +75,7 @@ public class Folder implements CompositeFileSystemComponent {
             for (int i = 0; i < f.getHeight(); i++) {
                 sb.append('\t');
             }
-            sb.append("----").append(f.list()).append('\n');
+            sb.append("----").append(f.list());
         }
         return sb.toString()+'\n';
     }
@@ -104,5 +116,19 @@ public class Folder implements CompositeFileSystemComponent {
                 "Type=" + type + '\n' +
                 "Directory=" + getDirectory() + '\n' +
                 "ComponentCount=" + componentCount+'\n' ;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Folder folder = (Folder) o;
+        return name.equals(folder.name) &&
+                type.equals(folder.type);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(name, type);
     }
 }

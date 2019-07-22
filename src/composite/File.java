@@ -1,16 +1,17 @@
 package composite;
 
+import java.util.Objects;
+
 public class File implements FileSystemComponent{
 
     private int height;
+    private String name,type;
+    private FileSystemComponent parent;
 
     public File(String name) {
         this.name = name;
         this.type = "File";
     }
-
-    private String name,type;
-    private FileSystemComponent parent;
 
     @Override
     public String getName() {
@@ -34,7 +35,7 @@ public class File implements FileSystemComponent{
 
     @Override
     public String list() {
-        return name;
+        return name+"\n";
     }
 
     @Override
@@ -62,5 +63,19 @@ public class File implements FileSystemComponent{
         return  "Name=" + name + '\n' +
                 "Type=" + type + '\n' +
                 "Directory=" + getDirectory() + '\n';
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        File file = (File) o;
+        return name.equals(file.name) &&
+                type.equals(file.type);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(name, type);
     }
 }

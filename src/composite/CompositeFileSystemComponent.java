@@ -8,7 +8,6 @@ public interface CompositeFileSystemComponent extends FileSystemComponent {
 
     String list();
 
-    //TODO: possibly pkg-private
     void add(FileSystemComponent child);
 
 }

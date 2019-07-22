@@ -2,6 +2,7 @@ package composite;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 public class Drive implements CompositeFileSystemComponent {
 
@@ -28,6 +29,13 @@ public class Drive implements CompositeFileSystemComponent {
             }
         }
         else{
+            if(components.contains(child)){
+                try {
+                    throw new Exception(type + " Already Contains "+child.getName()+" "+child.getType());
+                } catch (Exception e) {
+                    return;
+                }
+            }
             child.setParent(this);
             components.add(child);
             componentCount++;
@@ -105,5 +113,19 @@ public class Drive implements CompositeFileSystemComponent {
                 "Type=" + type + '\n' +
                 "Directory="+getDirectory()+'\n'+
                 "ComponentCount=" + componentCount ;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Drive drive = (Drive) o;
+        return name.equals(drive.name) &&
+                type.equals(drive.type);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(name, type);
     }
 }

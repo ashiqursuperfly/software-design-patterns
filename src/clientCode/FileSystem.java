@@ -36,9 +36,14 @@ public class FileSystem {
         File fi122 = new File("SoftwareTesting.pptx");
         f12.add(fi122);
 
-        FileSystemComponent d2 = new Drive("Work");
+        Drive d2 = new Drive("Work");
         r.add(d2);
-        FileSystemComponent d3 = new Drive("Entertainment");
+        File fi2 = new File("JetbrainsLicense.md");
+        d2.add(fi2);
+        Folder f = new Folder("Intellij");
+        f.add(new File("IntelliJ.exe"));
+        d2.add(f);
+        Drive d3 = new Drive("Entertainment");
         r.add(d3);
 
         System.out.println(r.list());

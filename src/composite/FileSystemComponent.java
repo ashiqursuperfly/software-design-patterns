@@ -11,8 +11,6 @@ public interface FileSystemComponent {
 
     String list();
 
-    //TODO: Possibly pkg-private
-
     FileSystemComponent getParent();
 
     void setParent(FileSystemComponent parent);
@@ -20,4 +18,6 @@ public interface FileSystemComponent {
     int getHeight();
 
     void setHeight(int height);
+
+
 }

@@ -5,7 +5,7 @@ import abstractFactoryPattern.shapes.*;
 
 import java.util.Scanner;
 
-public class ComputerSystem {
+public class ComputerSystemMain {
 
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
@@ -38,6 +38,7 @@ public class ComputerSystem {
         }
     }
 
+
     private static Shape inputCircle() {
         Scanner sc = new Scanner(System.in);
         System.out.println("Enter radius");
@@ -56,8 +57,12 @@ public class ComputerSystem {
         System.out.println("Enter Length of Side 3");
         double side3 = sc.nextDouble();
 
-        return new Triangle(side1, side2, side3);
 
+        if(Triangle.isValid(side1,side2,side3))return new Triangle(side1, side2, side3);
+        else {
+            System.out.println("Error : Invalid Triangle ! Doesnt Satisfy Triangle Inequality!");
+            return null;
+        }
     }
 
     private static Shape inputSquare() {
@@ -69,12 +74,12 @@ public class ComputerSystem {
 
     private static Shape inputRectangle() {
         Scanner sc = new Scanner(System.in);
-        System.out.println("Enter length");
-        double length = sc.nextDouble();
-
         System.out.println("Enter width");
         double width = sc.nextDouble();
-        return new Rectangle(length, width);
+
+        System.out.println("Enter height");
+        double height = sc.nextDouble();
+        return new Rectangle(width, height);
     }
 
     private static void pickAndDisplayShape(Computer computer) {
@@ -84,7 +89,8 @@ public class ComputerSystem {
             int c2 = sc2.nextInt();
             switch (c2) {
                 case 1:
-                    computer.display(inputTriangle());
+                    Shape s = inputTriangle();
+                    if(s!=null)computer.display(s);
                     break;
                 case 2:
                     computer.display(inputRectangle());

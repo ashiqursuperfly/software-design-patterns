@@ -2,11 +2,12 @@ package abstractFactoryPattern;
 
 public class FactoryA implements AbstractFactory {
 
-    private String cpu="CPU-A",mmu="MMU-A",resolution="200x200";
+    private String cpu="CPU-A",mmu="MMU-A";
+    private int resolutionWidth=200,resolutionHeight=200;
 
     @Override
     public Computer createComputer() {
-        return new Computer(cpu,mmu,resolution);
+        return new Computer(cpu,mmu,new Resolution(resolutionWidth,resolutionHeight));
     }
 
 

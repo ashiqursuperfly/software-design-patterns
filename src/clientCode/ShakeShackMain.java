@@ -89,7 +89,9 @@ class ShakeShack {
                     System.out.println("Replaced " + ShakeExtraIngredients.AlmondMilk.name() + " by " + ShakeBaseIngredients.Milk.name());
                 }
             } else if (choice == 2) {
-                System.out.println("Options :\n1.Cookie(+40)\n2.Candy(+50)\n3.Remove Topping");
+                System.out.println("Options :\n1.Cookie(+"+ShakeExtraIngredients.Cookie.addedPrice+")" +
+                        "\n2.Candy(+"+ShakeExtraIngredients.Candy.addedPrice+")\n" +
+                        "3.Remove Topping");
                 Scanner sc2 = new Scanner(System.in);
                 int choice2 = sc2.nextInt();
                 if (choice2 == 1) {
@@ -140,7 +142,7 @@ class ShakeShack {
 
 }
 
-public class ShakeShackClientCode {
+public class ShakeShackMain {
 
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);

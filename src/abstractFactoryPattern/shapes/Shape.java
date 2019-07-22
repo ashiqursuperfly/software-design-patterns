@@ -1,6 +1,8 @@
 package abstractFactoryPattern.shapes;
 
-public interface Shape {
+import abstractFactoryPattern.ComputerDisplayable;
+
+public interface Shape extends ComputerDisplayable {
     double getArea();
     double getPerimeter();
 }

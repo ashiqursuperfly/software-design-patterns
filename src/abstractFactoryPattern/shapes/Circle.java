@@ -1,6 +1,8 @@
 package abstractFactoryPattern.shapes;
 
-public class Circle implements Shape{
+import abstractFactoryPattern.Computer;
+
+public class Circle implements Shape {
 
     private double radius;
 
@@ -23,7 +25,8 @@ public class Circle implements Shape{
         return "Circle(Area="+getArea()+",Perimeter="+getPerimeter()+")";
     }
 
-
-
-
+    @Override
+    public boolean isCompatible(Computer computer) {
+        return !(computer.getResolution().getWidth() < 2 * radius) && !(computer.getResolution().getHeight() < 2 * radius);
+    }
 }

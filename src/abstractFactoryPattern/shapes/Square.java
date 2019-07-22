@@ -1,5 +1,7 @@
 package abstractFactoryPattern.shapes;
 
+import abstractFactoryPattern.Computer;
+
 public class Square implements Shape {
 
     private double sideLength;
@@ -21,5 +23,10 @@ public class Square implements Shape {
     @Override
     public String toString() {
         return "Square(Area="+getArea()+",Perimeter="+getPerimeter()+")";
+    }
+
+    @Override
+    public boolean isCompatible(Computer computer) {
+        return !(computer.getResolution().getWidth() < sideLength) && !(computer.getResolution().getHeight() < sideLength);
     }
 }

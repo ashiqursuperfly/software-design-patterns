@@ -1,9 +1,11 @@
 package abstractFactoryPattern;
 
+
 import abstractFactoryPattern.shapes.Shape;
 
 public class Computer {
-    private String cpu,mmu,resolution;
+    private String cpu,mmu;
+    private Resolution resolution;
 
     public String getCpu() {
         return cpu;
@@ -13,16 +15,18 @@ public class Computer {
         return mmu;
     }
 
-    public String getResolution() {
+    public Resolution getResolution() {
         return resolution;
     }
 
-    public Computer(String cpu, String mmu, String resolution) {
+    public Computer(String cpu, String mmu, Resolution resolution) {
         this.cpu = cpu;
         this.mmu = mmu;
         this.resolution = resolution;
     }
     public void display(Shape shape) {
-        System.out.println(shape.toString()+" Resolution:"+resolution);
+        if(shape.isCompatible(this))System.out.println(shape.toString()+" Resolution:"+resolution);
+        else System.out.println("Error : The specified Shape cant be displayed in this Computer with resolution :"+resolution);
     }
+
 }

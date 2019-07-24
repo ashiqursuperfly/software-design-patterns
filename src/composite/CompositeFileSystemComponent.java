@@ -8,6 +8,11 @@ public interface CompositeFileSystemComponent extends FileSystemComponent {
 
     String list();
 
-    void add(FileSystemComponent child);
+    boolean add(FileSystemComponent child);
 
+    boolean delete(FileSystemComponent child);
+
+    String movableList();
+
+    FileSystemComponent get(int index);
 }

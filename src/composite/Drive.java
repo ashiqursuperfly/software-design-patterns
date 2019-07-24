@@ -19,13 +19,13 @@ public class Drive implements CompositeFileSystemComponent {
     }
 
     @Override
-    public void add(FileSystemComponent child){
+    public boolean add(FileSystemComponent child){
 
         if(child.getType().equalsIgnoreCase("Drive")){
             try {
                 throw new Exception("Cant Create A Drive under a Drive");
             } catch (Exception e) {
-                e.printStackTrace();
+                return false;
             }
         }
         else{
@@ -33,15 +33,26 @@ public class Drive implements CompositeFileSystemComponent {
                 try {
                     throw new Exception(type + " Already Contains "+child.getName()+" "+child.getType());
                 } catch (Exception e) {
-                    return;
+                    return false;
                 }
             }
-            child.setParent(this);
-            components.add(child);
-            componentCount++;
-            child.setHeight(getHeight()+1);
+            boolean b = components.add(child);
+            if(b) {
+                child.setParent(this);
+                componentCount++;
+                child.setHeight(getHeight() + 1);
+            }
+            return b;
         }
     }
+
+    @Override
+    public boolean delete(FileSystemComponent child) {
+        boolean b = components.remove(child);
+        if(b) componentCount--;
+        return b;
+    }
+
     @Override
     public int getComponentCount() {
         return componentCount;
@@ -62,7 +73,28 @@ public class Drive implements CompositeFileSystemComponent {
 
         return sb.toString()+'\n';
     }
-
+    @Override
+    public String movableList(){
+        StringBuilder sb = new StringBuilder();
+        for (int i = 0, componentsSize = components.size(); i < componentsSize; i++) {
+            FileSystemComponent f = components.get(i);
+            if (!f.getType().equalsIgnoreCase("File")) {
+                sb.append(i).append(".").append(f.getName()).append('\n');
+            }
+        }
+        return sb.toString();
+    }
+    @Override
+    public FileSystemComponent get(int index) {
+        if(index < 0 || index > components.size()){
+            try {
+                throw new Exception("Invalid ID picked for Folder/Drive");
+            } catch (Exception e) {
+                return null;
+            }
+        }
+        return components.get(index);
+    }
     @Override
     public FileSystemComponent getParent() {
         return parent;

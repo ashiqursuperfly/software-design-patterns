@@ -91,9 +91,52 @@ public class Root implements CompositeFileSystemComponent{
     }
 
     @Override
-    public void add(FileSystemComponent child) {
-        components.add(child);
-        componentCount++;
+    public boolean add(FileSystemComponent child) {
+        if(!child.getType().equalsIgnoreCase("Drive")){
+            try {
+                throw new Exception("You can only add a Drive in Root!");
+            } catch (Exception e) {
+                return false;
+            }
+        }
+        boolean b = components.add(child);
+        if(b)componentCount++;
+        return b;
+    }
 
+    @Override
+    public boolean delete(FileSystemComponent child) {
+        boolean b = components.remove(child);
+        if(b)componentCount--;
+        return b;
+    }
+
+    @Override
+    public String movableList(){
+        StringBuilder sb = new StringBuilder();
+        for (int i = 0, componentsSize = components.size(); i < componentsSize; i++) {
+            FileSystemComponent f = components.get(i);
+            if (!f.getType().equalsIgnoreCase("File")) {
+                sb.append(i).append(".").append(f.getName()).append('\n');
+            }
+        }
+        return sb.toString();
+    }
+    @Override
+    public FileSystemComponent get(int index) {
+        if(index < 0 || index > components.size()){
+            try {
+                throw new Exception("Invalid ID picked for Folder/Drive");
+            } catch (Exception e) {
+                return null;
+            }
+        }
+        return components.get(index);
+    }
+
+    @Override
+    public String toString() {
+        return "Name=Root\n" +"Type=Root\n"+"Directory=Root\\"+'\n'+
+                "ComponentCount=" + componentCount +'\n';
     }
 }

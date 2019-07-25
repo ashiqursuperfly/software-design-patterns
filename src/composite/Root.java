@@ -60,7 +60,7 @@ public class Root implements CompositeFileSystemComponent{
     }
 
     @Override
-    public FileSystemComponent getParent() {
+    public CompositeFileSystemComponent getParent() {
         try {
             throw new Exception("Parent of Root Directory is always null");
         } catch (Exception e) {
@@ -69,7 +69,7 @@ public class Root implements CompositeFileSystemComponent{
     }
 
     @Override
-    public void setParent(FileSystemComponent parent) {
+    public void setParent(CompositeFileSystemComponent parent) {
         try {
             throw new Exception("Cant Set Parent of root Directory");
         } catch (Exception ignored) {
@@ -119,6 +119,15 @@ public class Root implements CompositeFileSystemComponent{
             if (!f.getType().equalsIgnoreCase("File")) {
                 sb.append(i).append(".").append(f.getName()).append('\n');
             }
+        }
+        return sb.toString();
+    }
+    @Override
+    public String deletableList(){
+        StringBuilder sb = new StringBuilder();
+
+        for (int i = 0,len = components.size(); i < len; i++) {
+            sb.append(i).append(".").append(components.get(i).getName()).append('\n');
         }
         return sb.toString();
     }

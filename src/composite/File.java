@@ -6,7 +6,7 @@ public class File implements FileSystemComponent{
 
     private int height;
     private String name,type;
-    private FileSystemComponent parent;
+    private CompositeFileSystemComponent parent;
 
     public File(String name) {
         this.name = name;
@@ -39,12 +39,12 @@ public class File implements FileSystemComponent{
     }
 
     @Override
-    public FileSystemComponent getParent() {
+    public CompositeFileSystemComponent getParent() {
         return parent;
     }
 
     @Override
-    public void setParent(FileSystemComponent parent) {
+    public void setParent(CompositeFileSystemComponent parent) {
         this.parent = parent;
     }
 

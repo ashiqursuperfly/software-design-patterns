@@ -11,9 +11,9 @@ public interface FileSystemComponent {
 
     String list();
 
-    FileSystemComponent getParent();
+    CompositeFileSystemComponent getParent();
 
-    void setParent(FileSystemComponent parent);
+    void setParent(CompositeFileSystemComponent parent);
 
     int getHeight();
 

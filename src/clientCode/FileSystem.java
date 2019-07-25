@@ -2,6 +2,7 @@ package clientCode;
 
 import composite.*;
 
+import java.util.InputMismatchException;
 import java.util.Scanner;
 
 public class FileSystem {
@@ -13,7 +14,13 @@ public class FileSystem {
             System.out.println("1.Add Drive/Folder/File 2.List\n" +
                     "3.Move 4.Remove 5.Details of Current Directory");
 
-            int choice = sc.nextInt();
+            int choice;
+            try {
+                choice = sc.nextInt();
+            }catch (InputMismatchException e){
+                System.out.println("Invalid Input");
+                return;
+            }
 
             switch (choice){
                 case 1:
@@ -23,10 +30,11 @@ public class FileSystem {
                     System.out.println(Root.getInstance().list());
                     break;
                 case 3:
-                    CompositeFileSystemComponent f =move(current);
+                    CompositeFileSystemComponent f = move(current);
                     current = f!=null?f:current;
                     break;
                 case 4:
+                    delete(current);
                     break;
                 case 5:
                     System.out.println(current.details());
@@ -75,6 +83,47 @@ public class FileSystem {
 
     }
 
+    private static void delete(CompositeFileSystemComponent current) {
+        Scanner sc = new Scanner(System.in);
+        //TODO:
+        String deletableList = current.deletableList();
+        if(!deletableList.trim().equals("")) {
+            System.out.println("Choose Any Of the following:");
+            System.out.println(deletableList);
+            System.out.println("-1.Exit");
+        }
+        else {
+            System.out.println("No Available Directory / Drives");
+            return;
+        }
+
+        int idx;
+
+        try {
+            idx = sc.nextInt();
+        }catch (InputMismatchException e){
+            System.out.println("Invalid Input");
+            return;
+        }
+
+        if(idx == -1){
+            System.out.println("Aborted");
+            return;
+        }
+        FileSystemComponent toBeDeleted = current.get(idx);
+        if(toBeDeleted != null){
+            if(current.delete(toBeDeleted)){
+                System.out.println("Deleted to->"+toBeDeleted.getDirectory());
+            }
+            else System.out.println("Could not Delete the specified Componenet");
+
+        }
+        else{
+            System.out.println("Could not Delete the specified Componenet");
+        }
+
+    }
+
     private static CompositeFileSystemComponent move(CompositeFileSystemComponent current) {
 
         Scanner sc = new Scanner(System.in);
@@ -83,18 +132,35 @@ public class FileSystem {
         if(!movableList.trim().equals("")) {
             System.out.println("Choose Any Folder Of the following:");
             System.out.println(movableList);
-            System.out.println("-1.Exit");
+            System.out.println("-1.Move Back");
+            System.out.println("-2.Exit");
         }
         else {
-            System.out.println("No Available Directory / Drives");
-            return null;
+
+            System.out.println("-1.Move Back");
+            System.out.println("-2.Exit");
         }
 
-        int idx = sc.nextInt();
+        int idx;
 
-        if(idx == -1){
+
+        try {
+            idx = sc.nextInt();
+        }catch (InputMismatchException e){
+            System.out.println("Invalid Input");
+            return null;
+        }
+        if(idx == -2){
             System.out.println("Aborted");
             return null;
+        }
+        else if(idx == -1){
+            if(!current.getType().equalsIgnoreCase("Root")){
+                System.out.println("Moved to->"+current.getParent().getDirectory());
+                return current.getParent();
+            }
+            System.out.println("Cant Go back.Inside Root Directory");
+            return Root.getInstance();
         }
 
         if(current.get(idx) != null){
@@ -122,9 +188,13 @@ public class FileSystem {
             else currentComponent = (Drive)current;
 
             System.out.println("1.Add A Folder 2.Add A File 3.None");
-
-            int c = sc.nextInt();
-
+            int c;
+            try {
+                c = sc.nextInt();
+            }catch (InputMismatchException e){
+                System.out.println("Invalid Input");
+                return;
+            }
             if(c == 1 || c == 2) {
                 Scanner sc2 = new Scanner(System.in);
                 String name;
@@ -153,7 +223,14 @@ public class FileSystem {
         }
         else if(current.getType().equalsIgnoreCase("Root")){
             System.out.println("1.Add a Drive 2.None");
-            int c = sc.nextInt();
+
+            int c;
+            try {
+               c = sc.nextInt();
+            }catch (InputMismatchException e){
+                System.out.println("Invalid Input");
+                return;
+            }
 
             if(c==1){
                 Scanner sc2 = new Scanner(System.in);

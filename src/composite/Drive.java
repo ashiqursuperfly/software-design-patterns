@@ -9,7 +9,7 @@ public class Drive implements CompositeFileSystemComponent {
     private int componentCount;
     private String name,type;
     private List<FileSystemComponent> components;
-    private FileSystemComponent parent; // parent can either be a folder or a drive
+    private CompositeFileSystemComponent parent; // parent can either be a folder or a drive
 
 
     public Drive(String name) {
@@ -85,6 +85,15 @@ public class Drive implements CompositeFileSystemComponent {
         return sb.toString();
     }
     @Override
+    public String deletableList(){
+        StringBuilder sb = new StringBuilder();
+
+        for (int i = 0,len = components.size(); i < len; i++) {
+            sb.append(i).append(".").append(components.get(i).getName()).append('\n');
+        }
+        return sb.toString();
+    }
+    @Override
     public FileSystemComponent get(int index) {
         if(index < 0 || index > components.size()){
             try {
@@ -96,12 +105,12 @@ public class Drive implements CompositeFileSystemComponent {
         return components.get(index);
     }
     @Override
-    public FileSystemComponent getParent() {
+    public CompositeFileSystemComponent getParent() {
         return parent;
     }
 
     @Override
-    public void setParent(FileSystemComponent parent) {
+    public void setParent(CompositeFileSystemComponent parent) {
         this.parent = parent;
     }
 

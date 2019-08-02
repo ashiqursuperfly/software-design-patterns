@@ -7,10 +7,17 @@ import java.util.Objects;
 public class Folder implements CompositeFileSystemComponent {
 
     private int componentCount;
-    private String name,type;
+    private String name, type;
     private List<FileSystemComponent> components;
     private CompositeFileSystemComponent parent; // parent can either be a folder or a drive
     private int height;
+
+    public Folder(String name) {
+        this.components = new ArrayList<>();
+        this.name = name;
+        this.type = "Folder";
+        this.height = 0;
+    }
 
     @Override
     public int getHeight() {
@@ -22,37 +29,31 @@ public class Folder implements CompositeFileSystemComponent {
         this.height = height;
         for (FileSystemComponent c :
                 components) {
-            c.setHeight(height+1);
+            c.setHeight(height + 1);
         }
-    }
-
-    public Folder(String name) {
-        this.components = new ArrayList<>();
-        this.name = name;
-        this.type = "Folder";
-        this.height = 0;
     }
 
     @Override
-    public boolean add(FileSystemComponent child){
+    public boolean add(FileSystemComponent child) {
 
-        if(child.getType().equalsIgnoreCase("Drive")){
+        if (child.getType().equalsIgnoreCase("Drive")) {
             try {
                 throw new Exception("Cant Create A Drive under a folder");
             } catch (Exception e) {
+                System.out.println(e.toString());
                 return false;
             }
-        }
-        else{
-            if(components.contains(child)){
+        } else {
+            if (components.contains(child)) {
                 try {
-                    throw new Exception(type+" Already Contains "+child.getName()+" "+child.getType());
+                    throw new Exception(type + " Already Contains " + child.getName() + " " + child.getType());
                 } catch (Exception e) {
+                    System.out.println(e.toString());
                     return false;
                 }
             }
             boolean b = components.add(child);
-            if(b) {
+            if (b) {
                 child.setParent(this);
 
                 componentCount++;
@@ -66,7 +67,7 @@ public class Folder implements CompositeFileSystemComponent {
     @Override
     public boolean delete(FileSystemComponent child) {
         boolean b = components.remove(child);
-        if(b) componentCount--;
+        if (b) componentCount--;
         return b;
 
     }
@@ -81,17 +82,18 @@ public class Folder implements CompositeFileSystemComponent {
         StringBuilder sb = new StringBuilder();
         sb.append(name).append('\n');
 
-        for (FileSystemComponent f:
-             components) {
+        for (FileSystemComponent f :
+                components) {
             for (int i = 0; i < f.getHeight(); i++) {
                 sb.append('\t');
             }
             sb.append("----").append(f.list());
         }
-        return sb.toString()+'\n';
+        return sb.toString() + '\n';
     }
+
     @Override
-    public String movableList(){
+    public String movableList() {
         StringBuilder sb = new StringBuilder();
 
         for (int i = 0, componentsSize = components.size(); i < componentsSize; i++) {
@@ -102,21 +104,24 @@ public class Folder implements CompositeFileSystemComponent {
         }
         return sb.toString();
     }
+
     @Override
-    public String deletableList(){
+    public String deletableList() {
         StringBuilder sb = new StringBuilder();
 
-        for (int i = 0,len = components.size(); i < len; i++) {
+        for (int i = 0, len = components.size(); i < len; i++) {
             sb.append(i).append(".").append(components.get(i).getName()).append('\n');
         }
         return sb.toString();
     }
+
     @Override
     public FileSystemComponent get(int index) {
-        if(index < 0 || index > components.size()){
+        if (index < 0 || index > components.size()) {
             try {
                 throw new Exception("Invalid ID picked for Folder/Drive");
             } catch (Exception e) {
+                System.out.println(e.toString());
                 return null;
             }
         }
@@ -145,7 +150,7 @@ public class Folder implements CompositeFileSystemComponent {
 
     @Override
     public String getDirectory() {
-        return this.parent.getDirectory()+"\\"+this.getName();
+        return this.parent.getDirectory() + "\\" + this.getName();
     }
 
     @Override
@@ -158,7 +163,7 @@ public class Folder implements CompositeFileSystemComponent {
         return "Name=" + name + '\n' +
                 "Type=" + type + '\n' +
                 "Directory=" + getDirectory() + '\n' +
-                "ComponentCount=" + componentCount+'\n' ;
+                "ComponentCount=" + componentCount + '\n';
     }
 
     @Override

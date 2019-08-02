@@ -3,18 +3,18 @@ package composite;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Root implements CompositeFileSystemComponent{
+public class Root implements CompositeFileSystemComponent {
 
     private static Root ourInstance = new Root();
     private List<FileSystemComponent> components;
     private int componentCount;
 
-    public static Root getInstance() {
-        return ourInstance;
-    }
-
     private Root() {
         components = new ArrayList<>();
+    }
+
+    public static Root getInstance() {
+        return ourInstance;
     }
 
     @Override
@@ -42,7 +42,7 @@ public class Root implements CompositeFileSystemComponent{
         return toString();
     }
 
-    private List<FileSystemComponent> getComponents(){
+    private List<FileSystemComponent> getComponents() {
         return components;
     }
 
@@ -52,8 +52,8 @@ public class Root implements CompositeFileSystemComponent{
         StringBuilder sb = new StringBuilder();
         sb.append("Root").append('\n');
 
-        for (FileSystemComponent fileSystemComponent:
-             components) {
+        for (FileSystemComponent fileSystemComponent :
+                components) {
             sb.append('\t').append(fileSystemComponent.list());
         }
         return sb.toString();
@@ -64,6 +64,7 @@ public class Root implements CompositeFileSystemComponent{
         try {
             throw new Exception("Parent of Root Directory is always null");
         } catch (Exception e) {
+            System.out.println(e);
             return null;
         }
     }
@@ -72,7 +73,8 @@ public class Root implements CompositeFileSystemComponent{
     public void setParent(CompositeFileSystemComponent parent) {
         try {
             throw new Exception("Cant Set Parent of root Directory");
-        } catch (Exception ignored) {
+        } catch (Exception e) {
+            System.out.println(e);
         }
     }
 
@@ -85,34 +87,36 @@ public class Root implements CompositeFileSystemComponent{
     public void setHeight(int height) {
         try {
             throw new Exception("Height of Root Directory always 0");
-        } catch (Exception ignored) {
+        } catch (Exception e){
+            System.out.println(e);
 
         }
     }
 
     @Override
     public boolean add(FileSystemComponent child) {
-        if(!child.getType().equalsIgnoreCase("Drive")){
+        if (!child.getType().equalsIgnoreCase("Drive")) {
             try {
                 throw new Exception("You can only add a Drive in Root!");
             } catch (Exception e) {
+                System.out.println(e);
                 return false;
             }
         }
         boolean b = components.add(child);
-        if(b)componentCount++;
+        if (b) componentCount++;
         return b;
     }
 
     @Override
     public boolean delete(FileSystemComponent child) {
         boolean b = components.remove(child);
-        if(b)componentCount--;
+        if (b) componentCount--;
         return b;
     }
 
     @Override
-    public String movableList(){
+    public String movableList() {
         StringBuilder sb = new StringBuilder();
         for (int i = 0, componentsSize = components.size(); i < componentsSize; i++) {
             FileSystemComponent f = components.get(i);
@@ -122,21 +126,24 @@ public class Root implements CompositeFileSystemComponent{
         }
         return sb.toString();
     }
+
     @Override
-    public String deletableList(){
+    public String deletableList() {
         StringBuilder sb = new StringBuilder();
 
-        for (int i = 0,len = components.size(); i < len; i++) {
+        for (int i = 0, len = components.size(); i < len; i++) {
             sb.append(i).append(".").append(components.get(i).getName()).append('\n');
         }
         return sb.toString();
     }
+
     @Override
     public FileSystemComponent get(int index) {
-        if(index < 0 || index > components.size()){
+        if (index < 0 || index > components.size()) {
             try {
                 throw new Exception("Invalid ID picked for Folder/Drive");
             } catch (Exception e) {
+                System.out.println(e);
                 return null;
             }
         }
@@ -145,7 +152,7 @@ public class Root implements CompositeFileSystemComponent{
 
     @Override
     public String toString() {
-        return "Name=Root\n" +"Type=Root\n"+"Directory=Root\\"+'\n'+
-                "ComponentCount=" + componentCount +'\n';
+        return "Name=Root\n" + "Type=Root\n" + "Directory=Root\\" + '\n' +
+                "ComponentCount=" + componentCount + '\n';
     }
 }

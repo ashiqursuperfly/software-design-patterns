@@ -1,7 +1,5 @@
 package composite;
 
-import java.util.List;
-
 public interface CompositeFileSystemComponent extends FileSystemComponent {
 
     int getComponentCount();

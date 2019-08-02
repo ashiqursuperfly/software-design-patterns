@@ -2,10 +2,10 @@ package composite;
 
 import java.util.Objects;
 
-public class File implements FileSystemComponent{
+public class File implements FileSystemComponent {
 
     private int height;
-    private String name,type;
+    private String name, type;
     private CompositeFileSystemComponent parent;
 
     public File(String name) {
@@ -25,7 +25,7 @@ public class File implements FileSystemComponent{
 
     @Override
     public String getDirectory() {
-        return parent.getDirectory()+"\\"+name;
+        return parent.getDirectory() + "\\" + name;
     }
 
     @Override
@@ -35,7 +35,7 @@ public class File implements FileSystemComponent{
 
     @Override
     public String list() {
-        return name+"\n";
+        return name + "\n";
     }
 
     @Override
@@ -60,7 +60,7 @@ public class File implements FileSystemComponent{
 
     @Override
     public String toString() {
-        return  "Name=" + name + '\n' +
+        return "Name=" + name + '\n' +
                 "Type=" + type + '\n' +
                 "Directory=" + getDirectory() + '\n';
     }

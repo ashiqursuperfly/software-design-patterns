@@ -10,8 +10,8 @@ class AdvancedMediaAdapter implements IMediaPlayer {
     }
 
     @Override
-    public void play(String fileType, String fileName) {
-        advancedMediaPlayer.playAdvancedMedia(fileType,fileName);
+    public void play(MediaFile mediaFile) {
+        advancedMediaPlayer.playAdvancedMedia(mediaFile);
     }
 
 }

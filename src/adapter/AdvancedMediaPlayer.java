@@ -1,40 +1,36 @@
 package adapter;
 
-import adapter.advancedMediaPlayers.FlvPlayer;
-import adapter.advancedMediaPlayers.IAdvancedMediaPlayer;
-import adapter.advancedMediaPlayers.Mp4Player;
-import adapter.advancedMediaPlayers.VlcPlayer;
-
 /** Can Play Only Advanced Media Types like : vlc,mp4,flv **/
 
 class AdvancedMediaPlayer implements IAdvancedMediaPlayer {
     private IAdvancedMediaPlayer advancedMediaPlayer;
 
-    private void playFlv(String fileName) {
+    private void playFlv(MediaFile mediaFile) {
         advancedMediaPlayer = new FlvPlayer();
-        advancedMediaPlayer.playAdvancedMedia("flv",fileName);
+        advancedMediaPlayer.playAdvancedMedia(mediaFile);
     }
 
-    private void playMp4(String fileName) {
+    private void playMp4(MediaFile mediaFile) {
 
         advancedMediaPlayer = new Mp4Player();
-        advancedMediaPlayer.playAdvancedMedia("mp4",fileName);
+        advancedMediaPlayer.playAdvancedMedia(mediaFile);
     }
 
-    private void playVlc(String fileName) {
+    private void playVlc(MediaFile mediaFile) {
         advancedMediaPlayer = new VlcPlayer();
-        advancedMediaPlayer.playAdvancedMedia("vlc",fileName);
+        advancedMediaPlayer.playAdvancedMedia(mediaFile);
     }
 
     @Override
-    public void playAdvancedMedia(String fileType,String fileName) {
-        switch (fileType.toLowerCase()){
+    public void playAdvancedMedia(MediaFile mediaFile) {
+        String fileType = mediaFile.getFileType();
+        switch (fileType){
             case "flv":
-                playFlv(fileName);break;
+                playFlv(mediaFile);break;
             case "mp4":
-                playMp4(fileName);break;
+                playMp4(mediaFile);break;
             case "vlc":
-                playVlc(fileName);break;
+                playVlc(mediaFile);break;
             default:
                 try {
                     throw new Exception(getClass().getName()+":Unsupported FileType:"+fileType);

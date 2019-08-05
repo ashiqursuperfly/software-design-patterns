@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Scanner;
 
 public class PartiallyDownState implements State {
+
     private ServerProviderCompany context;
 
     @Override
@@ -19,12 +20,12 @@ public class PartiallyDownState implements State {
     @Override
     public void stateSpecificBehaviour() {
 
-        //TODO: (Any) --> (PD) edges of the D.F.A
+        //(Any) --> (PD) edges of the D.F.A
         switch (context.getPreviousState().getStateID()) {
-            case "Operational":
+            case "OperationalState":
                 fromOperational();
                 break;
-            case "FullyDown":
+            case "FullyDownState":
                 //DoNothing
                 break;
             default:
@@ -63,7 +64,7 @@ public class PartiallyDownState implements State {
         Scanner sc = new Scanner(System.in);
 
         while (true){
-            System.out.println("ABC's Server Partially Down.Do You Want to Pay 20$/h Extra for Full-Functionality service(provided by DEF)?\n" +
+            u.update(context,"Hello :"+u.getEmail()+"\nABC's Server Partially Down.Do You Want to Pay 20$/h Extra for Full-Functionality service(provided by DEF)?\n" +
                     "1.YES 2.NO\n");
             String choice = sc.nextLine();
 
@@ -89,7 +90,7 @@ public class PartiallyDownState implements State {
         Scanner sc = new Scanner(System.in);
 
         while (true){
-            System.out.println("ABC's Server Partially Down.\n" +
+            u.update(context,"Hello :"+u.getEmail()+" ABC's Server Partially Down.\n" +
                     "1.Use Full-Service from DEF \n" +
                     "2.Use Full-Service from ABC and DEF Combined\n");
             String choice = sc.nextLine();
@@ -97,12 +98,12 @@ public class PartiallyDownState implements State {
             switch (choice){
                 case "1":
                     temp.setCurrentServiceCompany("DEF");
-                    temp.update(context,"Congrats. You are now receiving service from DEF");
+                    temp.update(context,"Congrats. You are now receiving full service from DEF");
                     //TODO: subscribe user to DEF
                     return;
                 case "2":
                     temp.setCurrentServiceCompany("ABC-DEF");
-                    temp.update(context,"You will temporarily receive limited service");
+                    temp.update(context,"You will receive full service from ABC & DEF combined");
                     return;
                 case "3":
                     System.out.println("Invalid Choice");

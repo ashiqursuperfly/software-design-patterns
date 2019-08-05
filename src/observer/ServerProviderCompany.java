@@ -14,7 +14,7 @@ public interface ServerProviderCompany {
     void notifyAllSubscribers();
 
     /** State Pattern's StatefulObject Methods**/
-    void switchState(State previousState, State currentState);
+    void switchState(State currentState);
 
     State getPreviousState();
 

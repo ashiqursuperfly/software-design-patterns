@@ -19,12 +19,12 @@ public class FullyDownState implements State {
 
     @Override
     public void stateSpecificBehaviour() {
-        //TODO: (Any) --> (FD) edges of the D.F.A
+        //(Any) --> (FD) edges of the D.F.A
         switch (context.getPreviousState().getStateID()) {
-            case "PartiallyDown":
+            case "PartiallyDownState":
                 fromPartiallyDown();
                 break;
-            case "Operational":
+            case "OperationalState":
                 fromOperational();
                 break;
             default:
@@ -38,7 +38,7 @@ public class FullyDownState implements State {
     }
 
     private void fromPartiallyDown() {
-
+        //TODO: If the user was using ABC-DEF shift all those users of ABC-DEF to DEF only
     }
 
     private void fromOperational() {
@@ -47,29 +47,31 @@ public class FullyDownState implements State {
         for (User u:
                 subscribers) {
             if(u instanceof PremiumUser){
-                u.update(context,"ABC's Server Went fully down temporarily" +
+                u.update(context,"Hello :"+u.getEmail()+"\nABC's Server Went fully down temporarily" +
                         " but since you are a premium user you can enjoy uninterrupted service provided by DEF");
             }
             else if(u instanceof RegularUser){
-                //TODO: send user total bill since the last state change
+                u.update(context,"Hello :"+u.getEmail());
                 RegularUser temp = (RegularUser)u;
                 Scanner sc = new Scanner(System.in);
-
-                while (true){
+                boolean input = true;
+                while (input){
                     System.out.println("Sorry,ABC's Server went fully down.Do You Want to Pay 20$/h Extra for uninterrupted service(provided by DEF)?\n" +
                             "1.YES 2.NO\n");
                     String choice = sc.nextLine();
 
                     switch (choice){
                         case "1":
+                            input = false;
                             temp.setPayingForServerDown(true);
                             temp.update(context,"Congrats. You are now receiving service from DEF");
                             //TODO: subscribe user to DEF
-                            return;
+                            break;
                         case "2":
+                            input = false;
                             temp.setPayingForServerDown(false);
                             temp.update(context,"Your service will remain interrupted temporarily");
-                            return;
+                            break;
                         case "3":
                             System.out.println("Invalid Choice");
                             break;

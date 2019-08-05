@@ -19,7 +19,7 @@ public class OperationalState implements State {
     @Override
     public void stateSpecificBehaviour() {
 
-        //TODO: (Any) --> (OP) edges of the D.F.A
+        //(Any) --> (OP) edges of the D.F.A
         switch (context.getPreviousState().getStateID()) {
             case "PartiallyDownState":
                 fromPartiallyDown();
@@ -45,10 +45,15 @@ public class OperationalState implements State {
         for (User u:
              subscribers) {
             if(u instanceof RegularUser){
-                //TODO: send user total bill since the last state change
+                u.update(context,"Hello :"+u.getEmail()+" ABC's Server is Back to Operational State");
                 RegularUser temp = (RegularUser)u;
-                if(temp.isPayingForServerDown())
-                    u.update(context,"Bill:"+u.getBill()+" since last change");
+                if(temp.isPayingForServerDown()) {
+                    u.update(context, "Bill:" + u.getBill() + " since last change");
+                }
+            }
+            else if(u instanceof PremiumUser){
+                // do nothing
+                u.update(context,"Hello :"+u.getEmail()+" ABC's Server is Back to Operational State");
             }
             else {
                 try {
@@ -68,10 +73,16 @@ public class OperationalState implements State {
         for (User u:
                 subscribers) {
             if(u instanceof RegularUser){
-                //TODO: send user total bill since the last state change
+                u.update(context,"Hello :"+u.getEmail()+" ABC's Server is Back to Operational State");
                 RegularUser temp = (RegularUser)u;
-                if(temp.isPayingForServerDown())
-                    u.update(context,"Bill:"+u.getBill()+" since last change");
+                if(temp.isPayingForServerDown()) {
+                    u.update(context, "Bill:" + u.getBill() + " since last change");
+                }
+
+            }
+            else if(u instanceof PremiumUser){
+                // do nothing
+                u.update(context,"Hello :"+u.getEmail()+" ABC's Server is Back to Operational State");
             }
             else{
                 try {

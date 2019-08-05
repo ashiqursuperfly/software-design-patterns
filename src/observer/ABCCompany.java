@@ -10,6 +10,7 @@ public class ABCCompany implements ServerProviderCompany {
     private List<User> subscribers;
 
     public ABCCompany() {
+        currentState = States.operationalState;
         subscribers = new ArrayList<>();
     }
 
@@ -29,8 +30,8 @@ public class ABCCompany implements ServerProviderCompany {
     }
 
     @Override
-    public void switchState(State previousState, State currentState) {
-        this.previousState = previousState;
+    public void switchState(State currentState) {
+        this.previousState = this.currentState;
         this.previousState.setContext(null);
         this.currentState = currentState;
         this.currentState.setContext(this);

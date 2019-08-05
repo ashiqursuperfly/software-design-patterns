@@ -20,7 +20,7 @@ public class PremiumUser implements User {
 
     @Override
     public void update(ServerProviderCompany source,String message) {
-        System.out.println("Notification From :"+source.getClass().getSimpleName() +" Message:"+ message);
+        System.out.println("Notification From :"+source.getClass().getSimpleName()+" To:"+email +" Message:"+ message);
     }
 
     @Override

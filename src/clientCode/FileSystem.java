@@ -55,7 +55,6 @@ public class FileSystem {
 
     private static void delete(CompositeFileSystemComponent current) {
         Scanner sc = new Scanner(System.in);
-        //TODO:
         String deletableList = current.deletableList();
         if (!deletableList.trim().equals("")) {
             System.out.println("Choose Any Of the following:");

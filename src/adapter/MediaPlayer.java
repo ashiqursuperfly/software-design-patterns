@@ -8,11 +8,11 @@ import java.util.List;
 public class MediaPlayer implements IMediaPlayer {
 
     private AdvancedMediaAdapter advancedMediaAdapter;
-    private List<List<MediaFile>> playLists;
+    private List<List<MediaFile>> playlists;
     private List<MediaFile> currentlyPlaying;
 
     public MediaPlayer() {
-        playLists = new ArrayList<>();
+        playlists = new ArrayList<>();
         advancedMediaAdapter = new AdvancedMediaAdapter();
     }
     public void addToCurrentlyPlayingPlaylist(String fileName,String fileType,float duration,float size){
@@ -22,7 +22,7 @@ public class MediaPlayer implements IMediaPlayer {
         float duration=0;
 
         if(currentlyPlaying == null){
-            playLists.add(playlist);
+            playlists.add(playlist);
             System.out.println("Added New Playlist");
             displayPlayList(playlist);
             return;
@@ -32,7 +32,7 @@ public class MediaPlayer implements IMediaPlayer {
             duration += mediaFile.getDuration();
         }
         if(duration < elapsed) {
-            playLists.add(playlist);
+            playlists.add(playlist);
             System.out.println("Added New Playlist");
             displayPlayList(playlist);
             return;
@@ -51,9 +51,9 @@ public class MediaPlayer implements IMediaPlayer {
             System.out.println("--"+m.toString());
         }
     }
-    public void playPlayList(int id){
-        if(id>=0 && id< playLists.size()) {
-            currentlyPlaying = playLists.get(id);
+    public void playPlaylist(int id){
+        if(id>=0 && id< playlists.size()) {
+            currentlyPlaying = playlists.get(id);
             for (MediaFile m :
                     currentlyPlaying) {
                 play(m);

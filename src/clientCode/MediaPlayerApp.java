@@ -20,7 +20,7 @@ public class MediaPlayerApp {
         playlist.add(new MediaFile("hello","mp5",2.30f,3.21f));
 
         mp.addPlayList(0,playlist);
-        mp.playPlayList(0);
+        mp.playPlaylist(0);
         mp.addToCurrentlyPlayingPlaylist("added","mp3",2.0f,1f);
         mp.displayPlayList(playlist);
         mp.addPlayList(5, new ArrayList<>(playlist));

@@ -13,8 +13,8 @@ public class FileSystem {
         CompositeFileSystemComponent current = Root.getInstance();
 
         while (true) {
-            System.out.println("1.Add Drive/Folder/File 2.List\n" +
-                    "3.Move 4.Remove 5.Details of Current Directory");
+            System.out.println("1.Add Drive/Folder/File\n2.List\n" +
+                    "3.Move\n4.Remove\n5.Details of Current Directory");
 
             int choice;
             try {
@@ -46,6 +46,7 @@ public class FileSystem {
                         throw new Exception("Invalid Choice");
                     } catch (Exception e) {
                         System.out.println(e.toString());
+                        break;
                     }
             }
         }
@@ -150,7 +151,7 @@ public class FileSystem {
                 currentComponent = (Folder) current;
             else currentComponent = (Drive) current;
 
-            System.out.println("1.Add A Folder 2.Add A File 3.None");
+            System.out.println("1.Add A Folder 2.Add A File 3.Cancel");
             int c;
             try {
                 c = sc.nextInt();
@@ -183,7 +184,7 @@ public class FileSystem {
             }
 
         } else if (current.getType().equalsIgnoreCase("Root")) {
-            System.out.println("1.Add a Drive 2.None");
+            System.out.println("1.Add a Drive 2.Cancel");
 
             int c;
             try {

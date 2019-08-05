@@ -44,13 +44,13 @@ public class OperationalState implements State {
 
         for (User u:
              subscribers) {
-            if(u.getType().equals(PremiumUser.class.getSimpleName())){
-                //DoNothing
-            }
-            else if(u.getType().equals(PremiumUser.class.getSimpleName())){
+            if(u instanceof RegularUser){
                 //TODO: send user total bill since the last state change
+                RegularUser temp = (RegularUser)u;
+                if(temp.isPayingForServerDown())
+                    u.update(context,"Bill:"+u.getBill()+" since last change");
             }
-            else{
+            else {
                 try {
                     throw new Exception("Invalid User Type:"+u.getType());
                 } catch (Exception e) {
@@ -67,11 +67,11 @@ public class OperationalState implements State {
 
         for (User u:
                 subscribers) {
-            if(u.getType().equals(PremiumUser.class.getSimpleName())){
-
-            }
-            else if(u.getType().equals(PremiumUser.class.getSimpleName())){
-
+            if(u instanceof RegularUser){
+                //TODO: send user total bill since the last state change
+                RegularUser temp = (RegularUser)u;
+                if(temp.isPayingForServerDown())
+                    u.update(context,"Bill:"+u.getBill()+" since last change");
             }
             else{
                 try {

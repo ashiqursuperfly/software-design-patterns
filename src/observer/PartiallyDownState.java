@@ -3,7 +3,7 @@ package observer;
 import java.util.List;
 import java.util.Scanner;
 
-public class PartiallyDownState implements State {
+class PartiallyDownState implements State {
 
     private ServerProviderCompany context;
 

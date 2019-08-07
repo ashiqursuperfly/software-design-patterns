@@ -3,7 +3,7 @@ package observer;
 import java.util.List;
 import java.util.Scanner;
 
-public class FullyDownState implements State {
+class FullyDownState implements State {
 
     private ServerProviderCompany context;
 

@@ -1,6 +1,10 @@
 package clientCode;
 
-import observer.*;
+
+import observer.ABCCompany;
+import observer.PremiumUser;
+import observer.RegularUser;
+import observer.States;
 
 public class ServerProviderMain {
     public static void main(String[] args) {

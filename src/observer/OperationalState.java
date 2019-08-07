@@ -2,7 +2,7 @@ package observer;
 
 import java.util.List;
 
-public class OperationalState implements State {
+class OperationalState implements State {
 
     private ServerProviderCompany context;
 

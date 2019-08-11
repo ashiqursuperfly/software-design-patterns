@@ -3,19 +3,20 @@ package observer;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ABCCompany implements ServerProviderCompany {
+public class DEFCompany implements ServerProviderCompany {
 
-    private static ABCCompany instance = new ABCCompany();
+    private static DEFCompany instance = new DEFCompany();
     private State currentState, previousState;
 
     private List<User> subscribers;
 
-    private ABCCompany() {
+    private DEFCompany() {
+
         currentState = States.operationalState;
         subscribers = new ArrayList<>();
     }
 
-    public static ABCCompany getInstance() {
+    public static DEFCompany getInstance() {
         return instance;
     }
 

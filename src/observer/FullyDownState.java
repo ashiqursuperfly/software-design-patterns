@@ -38,7 +38,27 @@ class FullyDownState implements State {
     }
 
     private void fromPartiallyDown() {
-        //TODO: If the user was using ABC-DEF shift all those users of ABC-DEF to DEF only
+        List<User> subscribers = context.getSubscribers();
+
+        for (User u :
+                subscribers) {
+            if (u instanceof PremiumUser) {
+
+                PremiumUser temp = (PremiumUser)u;
+
+                if(temp.getCurrentServiceProviderCompany().equals(ABCCompany.class.getSimpleName()+","+DEFCompany.class.getSimpleName())){
+                    DEFCompany.getInstance().subscribe(u);
+                    u.update(context, "Hello :" + u.getEmail() + "\nABC's Server Went fully down temporarily." +
+                            "Previously You Were using Combined Service from ABC & DEF.\n Now, you'll be using full service from DEF");
+                }
+                else {
+                    u.update(context, "Hello :" + u.getEmail() + "\nABC's Server Went fully down temporarily" +
+                            " but since you are a premium user you can enjoy uninterrupted service provided by DEF");
+                }
+
+            }
+
+        }
     }
 
     private void fromOperational() {
@@ -65,7 +85,7 @@ class FullyDownState implements State {
                             input = false;
                             temp.setPayingForServerDown(true);
                             temp.update(context,"Congrats. You are now receiving service from DEF");
-                            //TODO: subscribe user to DEF
+                            DEFCompany.getInstance().subscribe(temp);
                             break;
                         case "2":
                             input = false;

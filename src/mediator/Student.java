@@ -2,11 +2,13 @@ package mediator;
 
 public class Student {
 
+    private static int count = 0;
     private String name,dept,id;
 
-    public Student(String name, String dept) {
+    public Student(String name,String dept) {
         this.name = name;
         this.dept = dept;
+        this.id =  dept+"-"+count++;
     }
 
     public String getName() {

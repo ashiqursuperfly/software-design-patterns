@@ -16,10 +16,11 @@ public class ExamController {
     public static void receiveExamScriptsFromExaminer(String examId, HashMap<String, ExamScript> scripts) {
         ExamController.scripts.put(examId, scripts);
         scrutinizeScripts(examId);
+        publishExamResults(examId);
     }
 
     private static void scrutinizeScripts(String examId) {
-        publishExamResults(examId);
+        //Scrutinize Logic
     }
 
     private static void publishExamResults(String examId) {

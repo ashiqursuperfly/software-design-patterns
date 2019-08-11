@@ -72,7 +72,7 @@ class PartiallyDownState implements State {
                 case "1":
                     temp.setPayingForServerDown(true);
                     temp.update(context,"Congrats. You are now receiving service from DEF");
-                    //TODO: subscribe user to DEF
+                    DEFCompany.getInstance().subscribe(temp);
                     return;
                 case "2":
                     temp.setPayingForServerDown(false);
@@ -97,12 +97,12 @@ class PartiallyDownState implements State {
 
             switch (choice){
                 case "1":
-                    temp.setCurrentServiceCompany("DEF");
+                    temp.setCurrentServiceProviderCompany(DEFCompany.class.getSimpleName());
                     temp.update(context,"Congrats. You are now receiving full service from DEF");
-                    //TODO: subscribe user to DEF
+                    DEFCompany.getInstance().subscribe(temp);
                     return;
                 case "2":
-                    temp.setCurrentServiceCompany("ABC-DEF");
+                    temp.setCurrentServiceProviderCompany(ABCCompany.class.getSimpleName()+","+DEFCompany.class.getSimpleName());
                     temp.update(context,"You will receive full service from ABC & DEF combined");
                     return;
                 case "3":

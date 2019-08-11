@@ -3,12 +3,14 @@ package mediator;
 import java.util.HashMap;
 
 public class Examiner {
+
+    private static int count = 0;
     private String name,dept,id;
 
     public Examiner(String name, String dept) {
         this.name = name;
         this.dept = dept;
-        this.id = name.substring(0,4) +"-"+dept;
+        this.id =  dept+"-"+count++;
     }
 
     public String getName() {

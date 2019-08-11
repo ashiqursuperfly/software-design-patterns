@@ -2,7 +2,7 @@ package observer;
 
 public class PremiumUser implements User {
 
-    private String email,currentServiceCompany;
+    private String email, currentServiceProviderCompany;
 
     private float bill = (float) Math.PI;
 
@@ -29,11 +29,11 @@ public class PremiumUser implements User {
     }
 
 
-    public String getCurrentServiceCompany() {
-        return currentServiceCompany;
+    public String getCurrentServiceProviderCompany() {
+        return currentServiceProviderCompany;
     }
 
-    public void setCurrentServiceCompany(String currentServiceCompany) {
-        this.currentServiceCompany = currentServiceCompany;
+    public void setCurrentServiceProviderCompany(String currentServiceProviderCompany) {
+        this.currentServiceProviderCompany = currentServiceProviderCompany;
     }
 }

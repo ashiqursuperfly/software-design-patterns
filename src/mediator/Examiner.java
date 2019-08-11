@@ -25,8 +25,17 @@ public class Examiner {
         return dept;
     }
 
-    public void sendExamScripts(String examId,HashMap<String,ExamScript> scripts){
+    public void sendExamScripts(String examId,HashMap<Student,ExamScript> scripts){
         ExamController.receiveExamScriptsFromExaminer(examId,scripts);
+    }
+
+    public void receiveReExamineRequest(ExamScript e){
+        reExamine(e);
+        sendAfterReExamine(e.getExamId(),e);
+    }
+
+    private void reExamine(ExamScript e) {
+        e.setMarks(e.getMarks()+2);
     }
 
     public void sendAfterReExamine(String examId,ExamScript e){

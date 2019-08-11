@@ -5,7 +5,7 @@ import java.util.HashMap;
 public class Exam {
 
     private String id,examinerId;
-    private HashMap<String,ExamScript> scripts;
+    private HashMap<Student,ExamScript> scripts;
 
 
     public Exam(String id) {
@@ -18,5 +18,13 @@ public class Exam {
 
     public String getExaminerId() {
         return examinerId;
+    }
+
+    public void setScripts(HashMap<Student, ExamScript> scripts) {
+        this.scripts = scripts;
+    }
+
+    public HashMap<Student, ExamScript> getScripts() {
+        return scripts;
     }
 }

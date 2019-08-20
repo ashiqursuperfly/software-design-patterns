@@ -47,14 +47,14 @@ public class Root implements CompositeFileSystemComponent {
     }
 
     @Override
-    public String list() {
+    public String list(int level) {
 
         StringBuilder sb = new StringBuilder();
-        sb.append("Root").append('\n');
+        //sb.append("Root").append('\n');
 
         for (FileSystemComponent fileSystemComponent :
                 components) {
-            sb.append('\t').append(fileSystemComponent.list());
+            sb.append('\t').append(fileSystemComponent.list(getHeight()+1));
         }
         return sb.toString();
     }
@@ -80,7 +80,7 @@ public class Root implements CompositeFileSystemComponent {
 
     @Override
     public int getHeight() {
-        return 0;
+        return -1;
     }
 
     @Override
@@ -104,7 +104,10 @@ public class Root implements CompositeFileSystemComponent {
             }
         }
         boolean b = components.add(child);
-        if (b) componentCount++;
+        if (b) {
+            child.setParent(this);
+            componentCount++;
+        }
         return b;
     }
 

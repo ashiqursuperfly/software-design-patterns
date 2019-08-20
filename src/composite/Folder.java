@@ -78,16 +78,19 @@ public class Folder implements CompositeFileSystemComponent {
     }
 
     @Override
-    public String list() {
+    public String list(int level) {
+        if(componentCount == 0){
+            return "Drive Empty, Nothing to list";
+        }
         StringBuilder sb = new StringBuilder();
         sb.append(name).append('\n');
 
         for (FileSystemComponent f :
                 components) {
-            for (int i = 0; i < f.getHeight(); i++) {
+            for (int i = 0; i <= level ; i++) {
                 sb.append('\t');
             }
-            sb.append("----").append(f.list());
+            sb.append("----").append(f.list(level+1));
         }
         return sb.toString() + '\n';
     }

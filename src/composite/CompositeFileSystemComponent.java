@@ -14,5 +14,5 @@ public interface CompositeFileSystemComponent extends FileSystemComponent {
 
     String deletableList();
 
-    String list();
+    String list(int level);
 }

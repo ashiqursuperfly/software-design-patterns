@@ -9,7 +9,7 @@ public interface FileSystemComponent {
 
     String details();
 
-    String list();
+    String list(int level);
 
     CompositeFileSystemComponent getParent();
 

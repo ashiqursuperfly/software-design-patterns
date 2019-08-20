@@ -34,7 +34,7 @@ public class File implements FileSystemComponent {
     }
 
     @Override
-    public String list() {
+    public String list(int level) {
         return name + "\n";
     }
 

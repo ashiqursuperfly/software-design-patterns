@@ -11,7 +11,18 @@ public class FileSystem {
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
         CompositeFileSystemComponent current = Root.getInstance();
-
+        current.add(new Drive("C"));
+        current = (CompositeFileSystemComponent) current.get(0); // C
+        current.add(new Folder("mp3"));
+        current.add(new Folder("mp4"));
+        current.add(new File("fly.flv"));
+        current = (CompositeFileSystemComponent) current.get(0); // mp3
+        current.add(new File("rainbow.mp3"));
+        current.add(new File("groove.mp3"));
+        current = current.getParent();//C
+        current = (CompositeFileSystemComponent) current.get(1); //mp4
+        current.add(new File("Sunshine.mp4"));
+        current = current.getParent();
         while (true) {
             System.out.println("1.Add Drive/Folder/File\n2.List\n" +
                     "3.Move\n4.Remove\n5.Details of Current Directory");
@@ -29,7 +40,8 @@ public class FileSystem {
                     createComponent(current);
                     break;
                 case 2:
-                    System.out.println(Root.getInstance().list());
+                    //System.out.println(Root.getInstance().list());
+                    System.out.println(current.list(0));
                     break;
                 case 3:
                     CompositeFileSystemComponent f = move(current);
@@ -98,10 +110,8 @@ public class FileSystem {
         if (!movableList.trim().equals("")) {
             System.out.println("Choose Any Folder Of the following:");
             System.out.println(movableList);
-            System.out.println("-1.Move Back");
-            System.out.println("-2.Exit");
-        } else {
-
+        }
+        if(current.getType().equalsIgnoreCase("Folder")){
             System.out.println("-1.Move Back");
             System.out.println("-2.Exit");
         }

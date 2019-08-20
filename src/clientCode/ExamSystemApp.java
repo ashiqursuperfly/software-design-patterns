@@ -1,6 +1,5 @@
 package clientCode;
 
-import mediator.ExamController;
 import mediator.ExamScript;
 import mediator.Examiner;
 import mediator.Student;
